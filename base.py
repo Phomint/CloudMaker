@@ -1,9 +1,7 @@
-#import First
+import First as f
 import pandas as pd
-import numpy as np
 from tkinter import Tk
 from tkinter.filedialog import askopenfile
-from tkinter.filedialog import asksaveasfilename
 
 def fonte():
     try:
@@ -38,3 +36,25 @@ if __name__ == '__main__':
         y = int(input('Tamanho eixo Y: '))
 
         tamanho = [x, y]
+
+    try:
+        nuvem = f.cria_cloud(fonte=dados, image=image, tamanho=tamanho, stopwords=None)
+        print('Nuvem criada')
+    except Exception as a:
+        print('Erro na criação do nuvem\n'+a)
+
+    opt = input('Deseja visualizar antes de salvar[s/N]: ')
+    if opt.lower() == 's':
+        try:
+            f.visualizar(nuvem)
+        except Exception as a:
+            print('Erro na função de visualizar\n'+a)
+
+    opt = input('Deseja salvar[S/n]: ')
+    if opt.lower() == 's':
+        try:
+            f.salvar(nuvem)
+            print('Salvo com sucesso!')
+        except Exception as a:
+            print('Erro ao salvar\n'+a)
+    print('Encerramento . . .')
